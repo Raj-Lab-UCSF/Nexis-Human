@@ -14,7 +14,7 @@ class run_Nexis:
         self.U = U_ # Matrix or vector of cell type or gene expression, nROI x nTypes
         self.init_vec = init_vec_ # Binary vector indicating seed location OR array of baseline pathology values, nROI x 1
         self.t_vec = t_vec_ # Vector of time points to output model predictions, 1 x nt
-        self.volcorrect = volcorrect_ # Binary flag indicating whether to use volume correction - ask ben 
+        self.volcorrect = volcorrect_ # Binary flag indicating whether to use volume correction 
         self.w_dir = w_dir_ # Binary flag indicating whether to use directionality or not 
         self.use_baseline = use_baseline_ # Binary flag indicating whether you are using baseline or a binary seed to initialize the model
         self.region_volumes = region_volumes_ # Array of region volumes, nROI x 1 if applicable

@@ -41,11 +41,11 @@ def mse_matrix(matrix1,matrix2):
 # Error function
 def Nexis_error(params, patient_tau, stages, nexis_model):
     
-    param1, param2, param3, param4, param5, param6 = params 
-    # param1 = alpha, param2 = beta, param3 = gamma, param4 = b, param5 = p, param6 = k
+    param1, param2, param3, param4, param5, param6, param7 = params 
+    # param1 = alpha, param2 = beta, param3 = gamma, param4 = s, param5 = b, param6 = p, param7 = k
 
     # Parameters for simulate_nexis method
-    parameters = [param1, param2, param3, 0.5, param4, param5, param6]  # [alpha, beta, gamma, s, b, p , k] 
+    parameters = [param1, param2, param3, param4, param5, param6, param7]  # [alpha, beta, gamma, s, b, p , k] 
 
     # Call the simulate_nexis method with the parameters
     Y = nexis_model.simulate_nexis(parameters)
