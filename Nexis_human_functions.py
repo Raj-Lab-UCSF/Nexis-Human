@@ -56,7 +56,13 @@ def Nexis_error(params, patient_tau, stages, nexis_model):
     # Calculate R
     corr_coeff, p_value = pearsonr(patient_tau.flatten(), Y_edited.flatten())
     error = mse_matrix(patient_tau, Y_edited) + (1- corr_coeff)
-    
+
+    if np.isnan(error) or np.isinf(error):
+            print(f"NaN or inf encountered with parameters: {params}")
+            print(f"Result: {Y}")
+        
     return error
+
+   
 
     
