@@ -41,25 +41,30 @@ def mse_matrix(matrix1,matrix2):
 
 # Cost function
 def Nexis_error(params, patient_tau, stages, nexis_model):
-    
-    param1, param2, param3, param4, param5, param6, param7 = params 
-    # param1 = alpha, param2 = beta, param3 = gamma, param4 = s, param5 = b, param6 = p, param7 = k
 
-    # Parameters for simulate_nexis method
-    parameters = [param1, param2, param3, param4, param5, param6, param7]  # [alpha, beta, gamma, s, b, p , k] 
+    try: 
+        param1, param2, param3, param4, param5, param6, param7 = params 
+        # param1 = alpha, param2 = beta, param3 = gamma, param4 = s, param5 = b, param6 = p, param7 = k
 
-    # Call the simulate_nexis method with the parameters
-    Y = nexis_model.simulate_nexis(parameters)
+        # Parameters for simulate_nexis method
+        parameters = [param1, param2, param3, param4, param5, param6, param7]  # [alpha, beta, gamma, s, b, p , k] 
 
-    # For optimization, only take stages from Y that correspond to patient's stages 
-    Y_edited = Y[:, stages]
-    # Calculate R
-    corr_coeff, p_value = pearsonr(patient_tau.flatten(), Y_edited.flatten())
-    error = mse_matrix(patient_tau, Y_edited) + (1- corr_coeff)
+        # Call the simulate_nexis method with the parameters
+        Y = nexis_model.simulate_nexis(parameters)
 
-    if np.isnan(error) or np.isinf(error):
-            print(f"NaN or inf encountered with parameters: {params}")
-            print(f"Result: {Y}")
+        # For optimization, only take stages from Y that correspond to patient's stages 
+        Y_edited = Y[:, stages]
+
+        # Calculate R
+        corr_coeff, p_value = pearsonr(patient_tau.flatten(), Y_edited.flatten())
+        error = mse_matrix(patient_tau, Y_edited) + (1- corr_coeff)
+
+        if np.isnan(error) or np.isinf(error):
+            raise ValueError("Invalid result")
+        
+    except Exception as e:
+        # Handle the error and return a large penalty value
+        error = 1e10
         
     return error
 
