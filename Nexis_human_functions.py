@@ -7,6 +7,7 @@ import pandas as pandas
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 from scipy.optimize import minimize
+from scipy.stats import pearsonr
 
 # Function to generate heat map of NEXIS output 
 def heatmap(init_vec_method, Y):
@@ -38,7 +39,7 @@ def mse_matrix(matrix1,matrix2):
     return np.mean((matrix1 - matrix2) ** 2) 
 
 
-# Error function
+# Cost function
 def Nexis_error(params, patient_tau, stages, nexis_model):
     
     param1, param2, param3, param4, param5, param6, param7 = params 
@@ -52,9 +53,10 @@ def Nexis_error(params, patient_tau, stages, nexis_model):
 
     # For optimization, only take stages from Y that correspond to patient's stages 
     Y_edited = Y[:, stages]
+    # Calculate R
+    corr_coeff, p_value = pearsonr(patient_tau.flatten(), Y_edited.flatten())
+    error = mse_matrix(patient_tau, Y_edited) + (1- corr_coeff)
+    
+    return error
 
-    error = mse_matrix(patient_tau, Y_edited)
     
-    return error
-    
-    return error
