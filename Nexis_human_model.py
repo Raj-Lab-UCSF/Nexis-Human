@@ -109,3 +109,17 @@ class run_Nexis:
         sol = sol.T
 
         return sol
+
+        # TRYING TO USE SOLVE_IVP
+        # sol = solve_ivp(
+        # fun=lambda t, y: ode_func(y, t, A_, Gamma_, k_),
+        # t_span=(t_[0], t_[-1]),
+        # y0=y0,
+        # t_eval=t_,
+        # method='LSODA',  # or try 'RK45', 'BDF', 'Radau'
+        # rtol=1e-6,       # relative tolerance
+        # atol=1e-8        # absolute tolerance
+        # )
+        # return sol.y  # Already in nROI x time points format
+
+        

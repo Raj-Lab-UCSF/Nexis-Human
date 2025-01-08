@@ -1,0 +1,39 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2707
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;}
+{\colortbl;\red255\green255\blue255;\red22\green21\blue22;\red246\green246\blue246;}
+{\*\expandedcolortbl;;\cssrgb\c11373\c10980\c11373;\cssrgb\c97255\c97255\c97255;}
+{\info
+{\author Farras Abdelnour}}\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs30 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \
+From Robin\
+\
+2) Adjust the tolerances upward. ftol is the functional tolerance (a threshold for how much the objective function can change between iterations of optimization for the algorithm to converge on a solution) and gtol is the gradient tolerance (same idea). Higher tolerances means slightly less accuracy but lower computation time. It can also increase the step size which will resolve your problem. I would try setting both to 1e-4.\
+\
+\
+
+\f1\b # Save to csv
+\f0\b0 \
+filename = 'output.csv'\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 with open(filename, 'w', newline='') as csvfile:\
+\'a0\'a0\'a0\'a0writer = csv.writer(csvfile)\
+\'a0\'a0\'a0\'a0writer.writerow(results.keys())\
+\'a0\'a0\'a0\'a0rows = zip(*results.values())\
+\'a0\'a0\'a0\'a0writer.writerows(rows)\
+\
+
+\f1\b Subjets loop index
+\f0\b0 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 if you wanna iterate through rows you can use 'for i, row in patient_data.iterrows():'
+\f1\b \cf2 \cb3 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+}
